@@ -1,6 +1,6 @@
 module.exports = {
 name: "create-ticket",
-code: `
+code: ``
 $description[Your ticket has been created!] $color[00ff00] $footer[If there are any problems with creating a ticket, contact my developers!]
 $newTicket[ticket-$username;|| <@$authorID> ||
 {description:<@$authorID> - $getServerVar[ticketmessage]
@@ -9,5 +9,5 @@ __Subject__
 $setUserVar[subject;$message]
 $cooldown[$getServerVar[ticketcooldown];Sorry, you can't create another ticket at the moment. You have to wait %time% until you can use this command again!]
 $onlyIf[$getServerVar[ticketcategory]!=unset;No Ticketcategory has been set yet. Please contact some server staff to change this by using \`$getServerVar[prefix]set-ticketcategory (CategoryID)\`.]
-`
+``
 };
