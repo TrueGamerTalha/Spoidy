@@ -82,9 +82,10 @@ bot.variables({[
   embedc: "00FFFF",
   afk: "0",
   afkwhy: "",
-  automod: "enabled",
-  antilinks: "enabled",
-  nword: "enabled",
+ticketcategory: "unset",
+ticketmessage: "Welcome in Support",
+panelmessage: "",
+ticketcooldown: "5m"
 }]);
 
 bot.command({
