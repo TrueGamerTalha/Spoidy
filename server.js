@@ -18,7 +18,7 @@ bot.onMessage();
 
 bot.musicStartCommand({
 	channel: '$channelID',
-	code: `$author[Started Playing;https://cdn.discordapp.com/emojis/814941457798266942.gif]
+	code: ``$author[Started Playing;https://cdn.discordapp.com/emojis/814941457798266942.gif]
 $description[**[$songInfo[title]\\]($songInfo[url])**
 
   Requested by: 
@@ -37,12 +37,12 @@ $songInfo[description] \`\`\`
 $addTimestamp 
 $color[$getVar[embedc]] 
 $volume[50]
-$wait[1s]`
+$wait[1s]``
 });
 
 bot.botJoinCommand({
   channel: "820977380943462420",
-  code: `$title[Spoidy Joined A Server!]
+  code: ``$title[Spoidy Joined A Server!]
 $color[$getVar[embedc]]
 $description[**ServerName:** $serverName
 
@@ -50,13 +50,13 @@ $description[**ServerName:** $serverName
 
 **Region:** $serverRegion
 
-**Members:** $membersCount]`
+**Members:** $membersCount]``
 });
 bot.onGuildJoin();
 
 bot.botLeaveCommand({
   channel: "820977380943462420",
-  code: `$title[Spoidy Left A Server!]
+  code: ``$title[Spoidy Left A Server!]
 $color[$getVar[embedc]]
 $description[**ServerName:** $serverName
 
@@ -64,13 +64,13 @@ $description[**ServerName:** $serverName
 
 **Owner:** <@$ownerID>
 
-**Members:** $membersCount]`
+**Members:** $membersCount]``
 });
 bot.onGuildLeave();
 
 bot.loadCommands('./commands/');
 
-bot.variables({
+bot.variables({[
   warn: "0",
   prefix: "S.",
   lvl: "0",
@@ -85,7 +85,7 @@ bot.variables({
   automod: "enabled",
   antilinks: "enabled",
   nword: "enabled",
-});
+}]);
 
 bot.command({
  name: "$alwaysExecute",
@@ -95,21 +95,21 @@ bot.command({
 
 bot.command({
   name: "setprefix",
-  code: `
+  code: ``
 The Prefix For This Server Has Been Successfully Changed To **$message**
 $setServerVar[prefix;$message]
 $onlyIf[$checkContains[$message;@everyone;@here]==false;You cant put the prefix as mentions!]
 $argsCheck[>1;Please Provide Prefix. ] 
 $onlyPerms[manageserver;❌ To change the bot's prefix on this guild you will require \`MANAGE_GUILD\` permissions.]
-`
+``
 });
 
 bot.command({
  name: "rank",
  aliases: ["r"],
- code: `$image[https://vacefron.nl/api/rankcard?username=$replaceText[$username[$mentioned[1;yes]]; ;+;-1]&avatar=$userAvatar[$mentioned[1;yes]]?size=4096&level=$getUserVar[lvl;$mentioned[1;yes]]&rank=&currentxp=$getUserVar[exp;$mentioned[1;yes]]&nextlevelxp=$getUserVar[rexp;$mentioned[1;yes]]&previouslevelxp=0&custombg=$getUserVar[lvlcard;$mentioned[1;yes]]&xpcolor=ffffff&isboosting=true]
+ code: ``$image[https://vacefron.nl/api/rankcard?username=$replaceText[$username[$mentioned[1;yes]]; ;+;-1]&avatar=$userAvatar[$mentioned[1;yes]]?size=4096&level=$getUserVar[lvl;$mentioned[1;yes]]&rank=&currentxp=$getUserVar[exp;$mentioned[1;yes]]&nextlevelxp=$getUserVar[rexp;$mentioned[1;yes]]&previouslevelxp=0&custombg=$getUserVar[lvlcard;$mentioned[1;yes]]&xpcolor=ffffff&isboosting=true]
 $onlyIf[$getServerVar[rsystem]>=1;{description:Leveling system is __Disabled__}{color:$getVar[embedc]}]
-$color[$getVar[embedc]]`
+$color[$getVar[embedc]]``
 });
 
 bot.command ({
