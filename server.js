@@ -1,7 +1,7 @@
-const dbd = require("dbd.js");
+const Aoijs = require("aoi.js")
 
-const bot = new dbd.Bot({
-  token:"Spoidy_Token",
+const bot = new Aoijs.Bot({
+  token: process.env.TOKEN,
   prefix: "$getServerVar[prefix]"
 });
 
@@ -12,14 +12,12 @@ bot.status({
   time: 12
 });
 
-
-
 bot.onMessage();
 
 bot.musicStartCommand({
 	channel: '$channelID',
-	code: ``$author[Started Playing;https://cdn.discordapp.com/emojis/814941457798266942.gif]
-$description[**[$songInfo[title]\\]($songInfo[url])**
+	code: `$author[Started Playing;https://cdn.discordapp.com/emojis/814941457798266942.gif]
+$description[**[$songInfo[title]]($songInfo[url])**
 
   Requested by: 
 <@$songInfo[userID]>
@@ -37,56 +35,60 @@ $songInfo[description] \`\`\`
 $addTimestamp 
 $color[$getVar[embedc]] 
 $volume[50]
-$wait[1s]``
+$wait[1s]`
 });
 
 bot.botJoinCommand({
   channel: "820977380943462420",
-  code: ``$title[Spoidy Joined A Server!]
+  code: `$title[Spoidy Joined A Server!]
 $color[$getVar[embedc]]
 $description[**ServerName:** $serverName
 
-**Owner:** <@$ownerID>
+**Owner:** $userTag[$ownerID]
 
 **Region:** $serverRegion
 
-**Members:** $membersCount]``
+**Members:** $membersCount]`
 });
 bot.onGuildJoin();
 
 bot.botLeaveCommand({
   channel: "820977380943462420",
-  code: ``$title[Spoidy Left A Server!]
+  code: `$title[Spoidy Left A Server!]
 $color[$getVar[embedc]]
 $description[**ServerName:** $serverName
 
+**Owner:** $userTag[$ownerID]
+
 **Region:** $serverRegion
 
-**Owner:** <@$ownerID>
-
-**Members:** $membersCount]``
+**Members:** $membersCount]`
 });
 bot.onGuildLeave();
 
+let count = 0;
+setInterval(() =>
+   require('node-fetch')(process.env.URL)
+   .then(() => console.log(`[${++count}] Kept ${process.env.URL} alive`))
+           
+   , 5 * 60 * 1000);
+
 bot.loadCommands('./commands/');
 
-bot.variables({[
+bot.variables({
   warn: "0",
   prefix: "S.",
-  lvl: "0",
-  lvlcard: "https://cdn.discordapp.com/attachments/807418758162284564/811474170532986940/20210217_123840.jpg",
+  lvl: "1",
   rexp: "40",
   exp: "0",
   lvlmsg: "GG! {user.mention} you leveled up to level {level}!",
+  col: "7000ff",
+  bg: "",
   rsystem: "0",
-  embedc: "00FFFF",
-  afk: "0",
-  afkwhy: "",
-ticketcategory: "unset",
-ticketmessage: "Welcome in Support",
-panelmessage: "",
-ticketcooldown: "5m"
-}]);
+  embedc: "7000FF",
+  AFK: "off",
+  time: "",
+});
 
 bot.command({
  name: "$alwaysExecute",
@@ -96,26 +98,19 @@ bot.command({
 
 bot.command({
   name: "setprefix",
-  code: ``
+  aliases: ['prefix'],
+  code: `
 The Prefix For This Server Has Been Successfully Changed To **$message**
 $setServerVar[prefix;$message]
 $onlyIf[$checkContains[$message;@everyone;@here]==false;You cant put the prefix as mentions!]
 $argsCheck[>1;Please Provide Prefix. ] 
 $onlyPerms[manageserver;❌ To change the bot's prefix on this guild you will require \`MANAGE_GUILD\` permissions.]
-``
-});
-
-bot.command({
- name: "rank",
- aliases: ["r"],
- code: ``$image[https://vacefron.nl/api/rankcard?username=$replaceText[$username[$mentioned[1;yes]]; ;+;-1]&avatar=$userAvatar[$mentioned[1;yes]]?size=4096&level=$getUserVar[lvl;$mentioned[1;yes]]&rank=&currentxp=$getUserVar[exp;$mentioned[1;yes]]&nextlevelxp=$getUserVar[rexp;$mentioned[1;yes]]&previouslevelxp=0&custombg=$getUserVar[lvlcard;$mentioned[1;yes]]&xpcolor=ffffff&isboosting=true]
-$onlyIf[$getServerVar[rsystem]>=1;{description:Leveling system is __Disabled__}{color:$getVar[embedc]}]
-$color[$getVar[embedc]]``
+`
 });
 
 bot.command ({
  name: "$alwaysExecute",
- code: `$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[lvlmsg];{user.tag};$userTag];{user.mention};<@$authorID>];{level};$getUserVar[lvl]];{exp};$getUserVar[exp]]
+ code: `$channelSendMessage[$channelID;$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[lvlmsg];{user.tag};$userTag];{user.mention};<@$authorID>];{level};$getUserVar[lvl]];{exp};$getUserVar[exp]]]
 $setUserVar[lvl;$sum[$getUserVar[lvl];1]]
 $setUserVar[rexp;$multi[$getUserVar[rexp];2]]
 $onlyIf[$getUserVar[exp]>=$getUserVar[rexp];]
@@ -148,66 +143,3 @@ $setServerVar[rsystem;0]
 $onlyPerms[manageserver;{description:You need \`MANAGE_SERVER\` permission}{color:$getVar[embedc]}]
 $cooldown[5s;Please wait **%time%**]`
 }) 
-
-bot.command({
-    name: "afk",
-    description: "Get an AFK status",
-    category: "utility",
-    usage: "afk <reason/status>",
-    code: `
-<@$authorID>.. I set your AFK: $message
-$setUserVar[afk;1;$authorID]
-$setUserVar[afkwhy;$message;$authorID]
-$suppressErrors
-`
-})
-
-bot.command({
-    name: "$alwaysExecute",
-    code: `
-$username[$mentioned[1]] is AFK: $getUserVar[afkwhy;$mentioned[1]]
-$onlyIf[$getUserVar[afk;$mentioned[1]]>=1;]
-`
-})
-
-bot.command({
-    name: "$alwaysExecute",
-    code: `
-$setUserVar[afk;0;$authorID]
-$setUserVar[afkwhy;;$authorID]    
-Hello <@$authorID>, I have removed your AFK
-$onlyIf[$getUserVar[afk;$authorID]>=1;]`
-})
-
-bot.command({
-name: "ticketpanel", 
-code: `
-$reactionCollector[$get[message];everyone;24d;ðŸ“:registered:;createticket;yes]
-$let[message;$sendMessage[{description:$getServerVar[panelmessage]};yes]]
-$onlyPerms[admin;Only admins can use this]
-$onlyIf[$getServerVar[ticketcategory]!=unset;No Ticketcategory has been set yet. Please contact some server staff to change this by using \`$getServerVar[prefix]set-ticketcategory (CategoryID)\`.]
-$onlyIf[$getServerVar[premium]==true;This is a Beta Feature. You need premium to use beta features]
-`
-})
-
-bot.awaitedCommand({
-name: "createticket",
-code: `
-$newTicket[ticket-$username;|| <@$authorID> ||
-{description:<@$authorID> - $getServerVar[ticketmessage]
-__Subject__
-\`\`\`Opened with Panel\`\`\`} {title:$username's ticket} {footer: Use \`$getServerVar[prefix]close-ticket\` to close the ticket} {color:00ff00};$getServerVar[ticketcategory];no;:x: Fatal error! Try setting the Ticketcategory and cooldown again. If thats not working contact some bot staff on the Support Server!]
-$setUserVar[subject;$message]
-$cooldown[$getServerVar[ticketcooldown];Sorry, you can't create another ticket at the moment. You have to wait %time% until you can use this command again!]
-$onlyIf[$getServerVar[ticketcategory]!=unset;No Ticketcategory has been set yet. Please contact some server staff to change this by using \`$getServerVar[prefix]set-ticketcategory (CategoryID)\`.]`})
-
-bot.command({
-name: "set-panelmessage", 
-code: `
-You have set the Panel message to: $description[$message]
-$setServerVar[panelmessage;$message]
-$argsCheck[<=1;Please write at least more that 1 word]
-$onlyPerms[admin;Only admins can use this]
-$onlyIf[$getServerVar[premium]==true;This is a Beta Feature. You need premium to use beta features]
-`
-})
