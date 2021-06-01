@@ -1,25 +1,24 @@
 module.exports = {
   name: "help",
   aliases: ["h", "help"],
-  code: `$title[$customEmoji[spoidyhelp] **Spoidy Help Commands**]
-  
-$description[**╔═ ≪ °❈° ≫ ═╗**
-    $customEmoji[sprefix] **Prefix: $getServerVar[prefix]**
-**╚═ ≪ °❈° ≫ ═╝**
-$customEmoji[helpcommon] **$getServerVar[prefix]helpcommon**
-Common Commands List
+  code: `$author[Spoidy Help Commands;$userAvatar[$clientID]]
+$description[**≪═════ ≪°❈°≫ ═════≫**]
+$addField[$customEmoji[helpfun] **$getServerVar[prefix]helpfun**;\`\`\`
+Fun Commands List\`\`\`]
 
-$customEmoji[helpmod]  **$getServerVar[prefix]helpmod**
-Moderation Commands List
+$addField[$customEmoji[smusic] **$getServerVar[prefix]helpmusic**;\`\`\`
+Music Commands List\`\`\`]
 
-$customEmoji[helpsettings] **$getServerVar[prefix]helpsettings**
-ServerSettings Commands List
+$addField[$customEmoji[helpsettings] **$getServerVar[prefix]helpsettings**;\`\`\`
+Settings Commands List\`\`\`]
 
-$customEmoji[smusic] **$getServerVar[prefix]helpmusic**
-Music Commans List
+$addField[$customEmoji[helpmod]  **$getServerVar[prefix]helpmod**;\`\`\`
+Admin Commands List\`\`\`]
 
-$customEmoji[helpfun] **$getServerVar[prefix]helpfun**
-Fun Commands List
-]
-$color[$getVar[embedc]]`
+$addField[$customEmoji[helpcommon] **$getServerVar[prefix]helpcommon**;\`\`\`
+Common Commands List\`\`\`]
+
+$color[$getVar[embedc]]
+$onlyIf[$message==;]
+`
 };

@@ -2,32 +2,32 @@ module.exports = {
 name: "helpmusic",
 aliases: ['hmusic'],
 code:` $title[$customEmoji[smusic] Spoidy Music Commands]
-$description[**$getServerVar[prefix]play <song>**
-Plays A Song From YouTube
+$addField[**$getServerVar[prefix]volume <volume>**;\`\`\`
+Change The Volume Of The Songs\`\`\`]
 
-**$getServerVar[prefix]pause**
-Pauses The Song/Queue
+$addField[**$getServerVar[prefix]skipto <songnumber>**;\`\`\`
+Skips To A Specified Song In The Queue\`\`\`]
 
-**$getServerVar[prefix]resume**
-Resumes The Song/Queue
+$addField[**$getServerVar[prefix]skip**;\`\`\`
+Skips The Current Song\`\`\`]
 
-**$getServerVar[prefix]nowplaying**
-Shows Information Of The Song
+$addField[**$getServerVar[prefix]queue**;\`\`\`
+Shows The Songs In The Queue\`\`\`]
 
-**$getServerVar[prefix]loop**
-Loops The Queue
+$addField[**$getServerVar[prefix]loop**;\`\`\`
+Enable/Disable Loop For The Queue\`\`\`]
 
-**$getServerVar[prefix]queue**
-Shows The Songs In The Queue
+$addField[**$getServerVar[prefix]nowplaying**;\`\`\`
+Shows Information Of The Song\`\`\`]
 
-**$getServerVar[prefix]skip**
-Skips The Current Song
+$addField[**$getServerVar[prefix]resume**;\`\`\`
+Resumes The Song/Queue\`\`\`]
 
-**$getServerVar[prefix]skipto <songnum>**
-Skips To A Specified Song In The Queue
+$addField[**$getServerVar[prefix]pause**;\`\`\`
+Pauses The Song/Queue\`\`\`]
 
-**$getServerVar[prefix]volume <volume>**
-Change The Volume Of The Songs]
+$addField[**$getServerVar[prefix]play <song>**;\`\`\`
+Plays A Song From YouTube\`\`\`]
 
 $color[$getVar[embedc]]`
 }

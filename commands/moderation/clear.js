@@ -1,11 +1,11 @@
 module.exports = {
   name: "clear",
   code: `
+  $deleteIn[3s]
 $title[**$username** Has Cleared $message Messages]
-$deletecommand
 $color[$getVar[embedc]]
-$deleteIn[3s]
-$clear[$message]
+$clear[$message;everyone;$channelid;yes]
+$deletecommand
 $onlyPerms[managemessages;You require Manage Messages permission for this to work.]
 $onlyIf[$isNumber[$message]==true;Thats not a number!]`
 };

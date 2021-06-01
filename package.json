@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dbd.js": "^3.0.1"
+    "aoi.js": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "canvacord": "^5.2.1"
   }
 }

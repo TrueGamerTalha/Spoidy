@@ -1,5 +1,6 @@
 module.exports = {
   name: "github",
-  code: `$title[GitHub Repository For Spoidy:;https://github.com/TrueGamerTalha/Spoidy]
+  code: `
+$channelSendMessage[$channelID;https://github.com/TrueGamerTalha/Spoidy]
 $color[$getVar[embedc]]`
 }

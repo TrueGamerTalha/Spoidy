@@ -2,22 +2,23 @@ module.exports = {
 name: "helpsettings",
 aliases: ["hsettings"],
 code: `$title[$customEmoji[helpsettings] Spoidy ServerSettings Commands]
-$description[**$getServerVar[prefix]setprefix <new_prefix>**
-Change the prefix of Spoidy
+$addField[**$getServerVar[prefix]nuke**;\`\`\`
+Nukes the channel\`\`\`]
 
-**$getServerVar[prefix]automodon**
-Enable Automod in your server
+$addField[**$getServerVar[prefix]unlock**;\`\`\`
+Unlock the channel\`\`\`]
 
-**$getServerVar[prefix]automodoff**
-Disable Automod in your server
+$addField[**$getServerVar[prefix]lock**;\`\`\`
+Lock the channel\`\`\`]
 
-**$getServerVar[prefix]nuke**
-Nukes the channel
+$addField[**$getServerVar[prefix]disablerank**;\`\`\`
+Disables The Leveling System\`\`\`]
 
-**$getServerVar[prefix]lock**
-Lock the channel
+$addField[**$getServerVar[prefix]enablerank**;\`\`\`
+Enables The Leveling System\`\`\`]
 
-**$getServerVar[prefix]unlock**
-Unlock the channel]
+$addField[**$getServerVar[prefix]setprefix <new_prefix>**;\`\`\`
+Change the prefix of Spoidy\`\`\`]
+
 $color[$getVar[embedc]]`
 }
