@@ -12,9 +12,7 @@ bot.status({
   time: 12
 });
 
-bot.onMessage({
- guildOnly: false
-});
+bot.onMessage();
 
 bot.musicStartCommand({
 	channel: '$channelID',
